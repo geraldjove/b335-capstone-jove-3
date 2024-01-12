@@ -84,7 +84,7 @@ module.exports.loginUser = (req, res) => {
       if (isPasswordCorrect) {
         passwordAttempts[result.email] = 0;
         console.log(passwordAttempts[result.email])
-        return res.status(200).send({ message: 'Successfully logged in', access_token: auth.createAccessToken(result) });
+        return res.status(200).send({ message: 'Successfully logged in', access: auth.createAccessToken(result) });
       } else {
         passwordAttempts[result.email]++;
         console.log(passwordAttempts[result.email])
