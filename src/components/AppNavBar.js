@@ -15,6 +15,9 @@ export default function AppNavbar() {
           <Nav className="me-auto">
             <Nav.Link>Home</Nav.Link>
             <Nav.Link>Products</Nav.Link>
+            <Nav.Link as={NavLink} to="/b4/admin-dashboard">
+              Admin Dashboard
+            </Nav.Link>
             <Nav.Link>Orders</Nav.Link>
             <Nav.Link>Checkout</Nav.Link>
           </Nav>

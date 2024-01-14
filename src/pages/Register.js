@@ -182,7 +182,8 @@ export default function Register() {
       )}
       <div className="text-center mt-4">
         <p>
-          Already have an account? <Link to="/b4/login">Login here</Link>
+          Already have an account? <Link to="/b4/login">Click here</Link> to log
+          in
         </p>
       </div>
     </Form>
