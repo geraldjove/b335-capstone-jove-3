@@ -71,8 +71,81 @@ export default function Cart() {
             console.error('Error during checkout:', error);
           });
       };
+
+      const handleQuantityChange = (productId, newQuantity) => {
+        // Find the item in the cart
+        const updatedCartItems = cartItems.map((item) => {
+          if (item.productId === productId) {
+            // Update the quantity and recalculate the subtotal
+            const updatedItem = {
+              ...item,
+              quantity: newQuantity,
+              subtotal: newQuantity * item.price,
+            };
+            return updatedItem;
+          }
+          return item;
+        });
     
+        // Update the local state with the new quantity and subtotal
+        setCartItems(updatedCartItems);
     
+        // Update the quantity on the server
+        fetch(`${process.env.REACT_APP_API_URL}/cart/update-cart-quantity`, {
+          method: 'PATCH', // Assuming you use PATCH for updating quantity
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('access')}`,
+          },
+          body: JSON.stringify({
+            productId,
+            quantity: newQuantity,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            // Handle the response from the server if needed
+            console.log('Quantity updated:', data);
+          })
+          .catch((error) => {
+            console.error('Error updating quantity:', error);
+          });
+      };
+
+      const handleRemoveFromCart = (productId) => {
+        // Remove the item from the local state
+        const updatedCartItems = cartItems.filter(
+          (item) => item.productId !== productId
+        );
+        setCartItems(updatedCartItems);
+    
+        // Remove the item from the server
+        fetch(
+          `${process.env.REACT_APP_API_URL}/cart/${productId}/remove-from-cart`,
+          {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('access')}`,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            // Handle the response from the server if needed
+            console.log('Item removed from cart:', data);
+          })
+          .catch((error) => {
+            console.error('Error removing item from cart:', error);
+          });
+          
+      };
+
+      const handleClearCart = () => {
+        // Clear all items from the local state
+        setCartItems([]);
+      }
+
     return (
         <div className="d-flex flex-column align-items-center justify-content-center">
         <h1>Your Shopping Cart</h1>
@@ -87,23 +160,46 @@ export default function Cart() {
         </tr>
         </thead>
         <tbody>
-        {cartItems.map((item) => (
+          {cartItems.map((item) => (
             <tr key={item.productId} className="text-center">
-            <td>{item.name}</td>
-            <td>{item.price}</td>
-            <td>{item.quantity}</td>
-            <td>{item.subtotal}</td>
-            <td>
-            {/* Add your action buttons here, e.g., remove item */}
-            <Button variant="danger">Remove</Button>
-            </td>
+              <td>{item.name}</td>
+              <td>{item.price}</td>
+              <td>
+                <Button
+                  variant="outline-secondary"
+                  size="sm"
+                  onClick={() =>
+                    handleQuantityChange(item.productId, item.quantity - 1)
+                  }
+                >
+                  -
+                </Button>{' '}
+                {item.quantity}{' '}
+                <Button
+                  variant="outline-secondary"
+                  size="sm"
+                  onClick={() =>
+                    handleQuantityChange(item.productId, item.quantity + 1)
+                  }
+                >
+                  +
+                </Button>
+              </td>
+              <td>{item.subtotal}</td>
+              <td>
+                {/* Add your action buttons here, e.g., remove item */}
+                <Button variant="danger" onClick={() => handleRemoveFromCart(item.productId)}>Remove</Button>
+              </td>
             </tr>
-            ))}
-            </tbody>
+          ))}
+        </tbody>
             <tfoot>
             <tr>
             <td colSpan={3}>
-            <Button variant="success" className="text-center rounded-0" size="lg" onClick={handleCheckout}>
+            <Button variant="danger" className="text-center rounded-0" size="lg" onClick={handleClearCart}>
+                Clear All
+              </Button>
+              <Button variant="success" className="text-center rounded-0" size="lg" onClick={handleCheckout}>
                 Checkout
               </Button>
               </td>

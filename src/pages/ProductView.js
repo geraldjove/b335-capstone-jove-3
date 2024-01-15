@@ -117,7 +117,7 @@ export default function ProductView() {
       </Button>
 
       ) : (
-        <Link className="btn btn-danger btn-block" to="/login">
+        <Link className="btn btn-danger btn-block" to="/b4/login">
         Log in to Buy
         </Link>
         )}
