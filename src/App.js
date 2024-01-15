@@ -6,7 +6,12 @@ import { Container } from "react-bootstrap";
 import AppNavbar from "./components/AppNavBar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import AdminDashboard from "./pages/AdminDashboard";
+import Logout from "./pages/Logout";
+import Products from "./pages/Products";
+import Home from "./pages/Home";
+import ProductView from "./pages/ProductView";
+import UserOrders from "./pages/UserOrders";
+import { type } from "@testing-library/user-event/dist/type";
 
 function App() {
   const [user, setUser] = useState({ id: null, isAdmin: null });
@@ -23,26 +28,27 @@ function App() {
   }, [user]);
 
   useEffect(() => {
-    fetch(`http://localhost:4004/b4/users/details`, {
+    fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-      },
+        Authorization: `Bearer ${ localStorage.getItem('access') }`
+      }
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (typeof data._id !== "undefined") {
+    .then(res => res.json())
+    .then(data => {
+      if (data.result && typeof data.result.id !== undefined) {
           setUser({
-            id: data._id,
-            isAdmin: data.isAdmin,
-          });
-        } else {
+            id: data.result.id,
+            isAdmin: data.result.isAdmin
+          })
+        }
+        else{
           setUser({
             id: null,
-            isAdmin: null,
-          });
+            isAdmin: null
+          })
         }
-      });
-  }, []);
+    })
+  },[])
 
   return (
     <UserProvider value={{ user, setUser, unsetUser }}>
@@ -50,9 +56,13 @@ function App() {
         <Container fluid>
           <AppNavbar />
           <Routes>
-            <Route path="/b4/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/" element={<Home />} />
+            <Route path="/b4/products" element={<Products />} />
+            <Route path="/b4/orders" element={<UserOrders />} />
             <Route path="/b4/register" element={<Register />} />
             <Route path="/b4/login" element={<Login />} />
+            <Route path="/b4/logout" element={<Logout />} />
+            <Route path="/b4/products/:productId" element={<ProductView />} />
           </Routes>
         </Container>
       </Router>
