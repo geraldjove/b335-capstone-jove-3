@@ -11,6 +11,7 @@ import Products from "./pages/Products";
 import Home from "./pages/Home";
 import ProductView from "./pages/ProductView";
 import UserOrders from "./pages/UserOrders";
+import Cart from "./pages/Cart";
 import { type } from "@testing-library/user-event/dist/type";
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
           <Route path="/" element={<Home />} />
             <Route path="/b4/products" element={<Products />} />
             <Route path="/b4/orders" element={<UserOrders />} />
+            <Route path="/b4/cart/get-cart" element={<Cart />} />
             <Route path="/b4/register" element={<Register />} />
             <Route path="/b4/login" element={<Login />} />
             <Route path="/b4/logout" element={<Logout />} />

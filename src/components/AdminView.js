@@ -57,7 +57,7 @@ export default function AdminView({ productsData, fetchData }) {
       </div>  
     </div>
       <Table striped bordered hover responsive >
-      <thead>
+      <thead >
       <tr className="text-center">
       <th>Id</th>
       <th>Name</th>

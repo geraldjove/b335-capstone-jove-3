@@ -24,16 +24,14 @@ export default function AppNavbar() {
       (user.isAdmin === true)?
       <>
       <Nav.Link as={NavLink} to="/b4/orders">Orders</Nav.Link>
-      <Nav.Link>Cart</Nav.Link>
-      <Nav.Link>Checkout</Nav.Link>
+      <Nav.Link as={NavLink} to="/b4/cart/get-cart">Cart</Nav.Link>
       <Link as={NavLink} to="/b4/logout" className="login-link">
       <Button variant="danger">Log Out</Button>
       </Link>
       </>
       :
       <>
-      <Nav.Link>Cart</Nav.Link>
-      <Nav.Link>Checkout</Nav.Link>
+      <Nav.Link as={NavLink} to="/b4/cart/get-cart">Cart</Nav.Link>
       <Link as={NavLink} to="/b4/logout" className="login-link">
       <Button variant="danger">Log Out</Button>
       </Link>
