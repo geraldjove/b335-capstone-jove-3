@@ -49,7 +49,7 @@ export default function AdminView({ productsData, fetchData }) {
       <h1 className="text-center">Admin Dashboard</h1>
       <div>
       <AddProduct fetchData={fetchData} />
-      <Button className='btn btn-primary'>
+      <Button className='btn btn-success rounded m-2'>
   <Link to="/b4/orders" style={{ color: 'white', textDecoration: 'none' }}>
     Show User Orders
   </Link>

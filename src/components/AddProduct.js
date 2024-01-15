@@ -21,34 +21,34 @@ const AddProduct = ({ fetchData }) => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/products`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('access')}`,
-        },
-        body: JSON.stringify(formData),
+    fetch(`${process.env.REACT_APP_API_URL}/products`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to add product: ${response.statusText}`);
+        }
+
+        // Close the modal and fetch updated data
+        handleClose();
+        fetchData();
+      })
+      .catch((error) => {
+        console.error('Error adding product:', error.message);
       });
-
-      if (!response.ok) {
-        throw new Error(`Failed to add product: ${response.statusText}`);
-      }
-
-      // Close the modal and fetch updated data
-      handleClose();
-      fetchData();
-    } catch (error) {
-      console.error('Error adding product:', error.message);
-    }
   };
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button className="m-2" variant="primary" onClick={handleShow}>
         Add Product
       </Button>
 
