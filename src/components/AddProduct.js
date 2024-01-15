@@ -1,110 +1,116 @@
-// AddProduct.js
+import React, { useState } from 'react';
+import { Modal, Button, Form } from 'react-bootstrap';
 
-import React, { useState } from "react";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-
-const AddProduct = ({ onAddProduct }) => {
-  const [showModal, setShowModal] = useState(false);
-
-  const [newProduct, setNewProduct] = useState({
-    name: "",
-    description: "",
+const AddProduct = ({ fetchData }) => {
+  const [show, setShow] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
     price: 0,
-    availability: false,
+    isActive: true,
   });
+
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setNewProduct((prevProduct) => ({
-      ...prevProduct,
-      [name]: type === "checkbox" ? checked : value,
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
-  const handleAddProduct = () => {
-    // Perform validation if needed
-    onAddProduct(newProduct);
-    setNewProduct({
-      name: "",
-      description: "",
-      price: 0,
-      availability: false,
-    });
-    handleCloseModal();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/products`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('access')}`,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to add product: ${response.statusText}`);
+      }
+
+      // Close the modal and fetch updated data
+      handleClose();
+      fetchData();
+    } catch (error) {
+      console.error('Error adding product:', error.message);
+    }
   };
 
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
-
   return (
-    <div className="text-center mt-5">
-      <Button
-        className="text-center mb-5 mx-2 bg-success"
-        variant="primary"
-        onClick={handleShowModal}
-      >
-        Add New Product
-      </Button>
-      <Button className="text-center mb-5" variant="primary">
-        Show User Orders
+    <>
+      <Button variant="primary" onClick={handleShow}>
+        Add Product
       </Button>
 
-      <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add New Product</Modal.Title>
+          <Modal.Title>Add Product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            <Form.Group>
-              <Form.Label>Name:</Form.Label>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formName">
+              <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
+                placeholder="Enter product name"
                 name="name"
-                value={newProduct.name}
+                value={formData.name}
                 onChange={handleChange}
+                required
               />
             </Form.Group>
-            <Form.Group>
-              <Form.Label>Description:</Form.Label>
+
+            <Form.Group controlId="formDescription">
+              <Form.Label>Description</Form.Label>
               <Form.Control
-                type="text"
+                as="textarea"
+                placeholder="Enter product description"
                 name="description"
-                value={newProduct.description}
+                value={formData.description}
                 onChange={handleChange}
+                required
               />
             </Form.Group>
-            <Form.Group>
-              <Form.Label>Price:</Form.Label>
+
+            <Form.Group controlId="formPrice">
+              <Form.Label>Price</Form.Label>
               <Form.Control
                 type="number"
+                placeholder="Enter product price"
                 name="price"
-                value={newProduct.price}
+                value={formData.price}
                 onChange={handleChange}
+                required
               />
             </Form.Group>
-            <Form.Group>
+
+            <Form.Group controlId="formIsActive">
               <Form.Check
                 type="checkbox"
-                label="Availability"
-                name="availability"
-                checked={newProduct.availability}
+                label="Is Active"
+                name="isActive"
+                checked={formData.isActive}
                 onChange={handleChange}
               />
             </Form.Group>
+
+            <Button variant="primary" type="submit">
+              Add Product
+            </Button>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleAddProduct}>
-            Add Product
-          </Button>
-        </Modal.Footer>
       </Modal>
-    </div>
+    </>
   );
 };
 

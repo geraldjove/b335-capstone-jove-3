@@ -27,7 +27,7 @@ export default function Login() {
     // Prevents page redirection via form submission
     e.preventDefault();
 
-    fetch("http://localhost:4004/b4/users/login", {
+    fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,14 +41,12 @@ export default function Login() {
       .then((data) => {
         console.log(data);
         // successful login
-        if (data.access) {
-          localStorage.setItem("access", data.access);
+        if (data.access_token) {
+          localStorage.setItem("access", data.access_token);
           // setUser(data); // user = {access: adskjaslkdqwk }
-          retrieveUserDetails(data.access);
+          retrieveUserDetails(data.access_token);
 
-          alert(`You are now logged in`);
-        } else if (data.error == "No Email Found") {
-          alert(`Email not found`);
+          alert(data.message);
         } else {
           alert(data.message);
         }
@@ -57,25 +55,28 @@ export default function Login() {
     setEmail("");
     setPassword("");
   }
-
   const retrieveUserDetails = (token) => {
-    fetch("http://localhost:4004/b4/users/details", {
+    fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => res.json())
       .then((data) => {
+        // console.log('data:', data);
         setUser({
-          id: data._id,
-          isAdmin: data.isAdmin,
+          id: data.result.id,
+          isAdmin: data.result.isAdmin,
         });
-
+  
         console.log(user);
       });
   };
 
   return (
+    (user.id !== null)?
+    <Navigate to="/b4/products" />
+  :
     <div className="container mt-5 d-flex align-items-center justify-content-center">
       <div className="row col-md-8 mt-5">
         <div className="col-md-6 p-4 bg-primary d-flex align-items-center">
