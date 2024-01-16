@@ -2,15 +2,17 @@ import React, { useState, useEffect, useContext } from 'react';
 import UserContext from '../UserContext';
 import AdminView from '../components/AdminView';
 import UserView from '../components/UserView';
-import { Navigate } from 'react-router-dom';
 import ProductSearch from '../components/ProductSearch';
+import { Button } from 'react-bootstrap';
+import SearchModal from '../components/SearchModal';
 
-export default function AdminDashboard() {
+export default function Products() {
   const { user } = useContext(UserContext);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [showSearchModal, setShowSearchModal] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -42,7 +44,6 @@ export default function AdminDashboard() {
   }, []);
 
   const handleSearch = (searchCriteria) => {
-    // Implement the search logic based on search criteria
     const filtered = products.filter((product) => {
       const isInRange =
         (searchCriteria.minPrice === '' || product.price >= searchCriteria.minPrice) &&
@@ -58,6 +59,13 @@ export default function AdminDashboard() {
     setFilteredProducts(filtered);
   };
 
+  const handleShowSearchModal = () => {
+    setShowSearchModal(true);
+  };
+
+  const handleHideSearchModal = () => {
+    setShowSearchModal(false);
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -68,18 +76,18 @@ export default function AdminDashboard() {
   }
 
   return (
-    user?.isAdmin ? (
-      <>
-        <ProductSearch onSearch={handleSearch} />
-        <AdminView productsData={products} fetchData={fetchData} /> 
-      </>
-    ) : (
-      <>
-        <ProductSearch onSearch={handleSearch} />
-        <UserView productsData={products} />
-      </>
-    )
+    <>
+      <Button variant="primary" onClick={handleShowSearchModal}>
+        Open Search Modal
+      </Button>
+
+      <SearchModal show={showSearchModal} onHide={handleHideSearchModal} onSearch={handleSearch} />
+
+      {user?.isAdmin ? (
+        <AdminView productsData={filteredProducts.length > 0 ? filteredProducts : products} fetchData={fetchData} />
+      ) : (
+        <UserView productsData={filteredProducts.length > 0 ? filteredProducts : products} />
+      )}
+    </>
   );
-  
-  
 }

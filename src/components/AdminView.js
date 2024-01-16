@@ -4,7 +4,6 @@ import EditProduct from './EditProduct';
 import ArchiveProduct from './ArchiveProduct';
 import AddProduct from './AddProduct';
 import { Link } from 'react-router-dom';
-import ProductSearch from '../components/ProductSearch';
 
 export default function AdminView({ productsData, fetchData }) {
   const [products, setProducts] = useState([]);
@@ -46,7 +45,6 @@ export default function AdminView({ productsData, fetchData }) {
     // Render your component JSX here
     return (
       <>
-      <ProductSearch />
       <div className="d-flex flex-column align-items-center justify-content-center">
       <h1 className="text-center">Admin Dashboard</h1>
       <div>
