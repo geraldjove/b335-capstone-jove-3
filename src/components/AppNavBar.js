@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import UserContext from "../UserContext";
 import Swal from "sweetalert2";
+import Brand from "../images/brand.svg";
 
 export default function AppNavbar() {
   const { user } = useContext(UserContext);
@@ -28,11 +29,11 @@ export default function AppNavbar() {
   return (
     <Navbar
       expand="lg"
-      className="text-center d-flex justify-content-center align-items-center text-white"
+      className="text-lg-center d-flex justify-content-center align-items-center text-white"
     >
-      <Container fluid class>
+      <Container>
         <Navbar.Brand as={Link} to="/" className="text-white">
-          Ecommerce App
+          <img src={Brand} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -40,9 +41,9 @@ export default function AppNavbar() {
             <Nav.Link as={NavLink} to="/" className="text-white">
               HOME
             </Nav.Link>
-            <span className="divider mx-3 d-flex justify-content-center align-items-center">
-                    |
-                  </span>
+            <span className="divider mx-2 d-none d-lg-flex justify-content-center align-items-center">
+              |
+            </span>
             <Nav.Link as={NavLink} to="/b4/products" className="text-white">
               SHOP
             </Nav.Link>
@@ -54,11 +55,7 @@ export default function AppNavbar() {
                   <Nav.Link as={NavLink} to="/b4/orders">
                     Orders
                   </Nav.Link>
-                  <Link
-                    to="#"
-                    onClick={handleLogout}
-                    className="logout-link"
-                  >
+                  <Link to="#" onClick={handleLogout} className="logout-link">
                     <Button variant="danger" className="rounded-0">
                       Log Out
                     </Button>
@@ -67,7 +64,21 @@ export default function AppNavbar() {
               ) : (
                 <>
                   <Nav.Link as={NavLink} to="/b4/cart/get-cart">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#e4e4e6" stroke-width="1" stroke-linecap="butt" stroke-linejoin="round"><circle cx="10" cy="20.5" r="1"/><circle cx="18" cy="20.5" r="1"/><path d="M2.5 2.5h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6l1.6-8.4H7.1"/></svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="30"
+                      height="30"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#e4e4e6"
+                      stroke-width="1"
+                      stroke-linecap="butt"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="10" cy="20.5" r="1" />
+                      <circle cx="18" cy="20.5" r="1" />
+                      <path d="M2.5 2.5h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6l1.6-8.4H7.1" />
+                    </svg>
                   </Nav.Link>
                   <span className="divider mx-3 d-flex justify-content-center align-items-center">
                     |
@@ -75,7 +86,8 @@ export default function AppNavbar() {
                   <Link
                     to="#"
                     onClick={handleLogout}
-                    className="logout-link d-flex justify-content-center align-items-center" style={{ textDecoration: 'none' }}
+                    className="logout-link d-flex justify-content-center align-items-center"
+                    style={{ textDecoration: "none" }}
                   >
                     <Button variant="danger" className="rounded-0 px-4">
                       Log Out
@@ -85,13 +97,21 @@ export default function AppNavbar() {
               )
             ) : (
               <>
-                <Nav.Link as={NavLink} to="/b4/register" className="register-link text-white">
+                <Nav.Link
+                  as={NavLink}
+                  to="/b4/register"
+                  className="register-link text-white"
+                >
                   Register
                 </Nav.Link>
-                <span className="divider mx-3 d-flex justify-content-center align-items-center">
-                    |
-                  </span>
-                <Link as={NavLink} to="/b4/login" style={{ textDecoration: 'none' }}>
+                <span className="divider mx-3 d-none d-lg-flex justify-content-center align-items-center">
+                  |
+                </span>
+                <Link
+                  as={NavLink}
+                  to="/b4/login"
+                  style={{ textDecoration: "none" }}
+                >
                   <Button className="btn-pink rounded-0 px-5">LOG IN</Button>
                 </Link>
               </>

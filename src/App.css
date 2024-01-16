@@ -3,27 +3,27 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Lato", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .cardHighlight {
   min-height: 100%;
 }
 
-h1{
+h1 {
   font-weight: bolder !important;
   color: white !important;
 }
 
-.h1-pink{
+.h1-pink {
   color: #cc5588 !important;
 }
 
-.btn-pink{
+.btn-pink {
   background-color: #cc5588 !important;
 }
 
-body{
+body {
   background-color: #33335b !important;
 }
 
