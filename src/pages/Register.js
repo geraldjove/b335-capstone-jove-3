@@ -176,14 +176,18 @@ export default function Register() {
           type="submit"
           id="submitBtn"
           disabled
+          style={{ backgroundColor: "#33335b", borderColor: "#ffffff" }}
         >
           Submit
         </Button>
       )}
       <div className="text-center mt-4">
         <p>
-          Already have an account? <Link to="/b4/login">Click here</Link> to log
-          in
+          Already have an account?{" "}
+          <Link to="/b4/login" style={{ color: "#cc5588" }}>
+            Click here
+          </Link>{" "}
+          to log in.
         </p>
       </div>
     </Form>
