@@ -21,7 +21,7 @@ export default function AppNavbar() {
       if (result.isConfirmed) {
         // Handle the logout logic here
         // For example, redirecting to the logout route
-        window.location.href = "/b4/logout";
+        window.location.href = "/b4/login";
       }
     });
   };
@@ -30,33 +30,41 @@ export default function AppNavbar() {
     <Navbar
       expand="lg"
       className="text-lg-center d-flex justify-content-center align-items-center text-white"
+      data-bs-theme="dark"
     >
       <Container>
         <Navbar.Brand as={Link} to="/" className="text-white">
-          <img style={{ width: "100px" }} src={Brand} />
+          <img src={Brand} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={NavLink} to="/" className="text-white">
+            <Nav.Link as={NavLink} to="/">
               HOME
             </Nav.Link>
             <span className="divider mx-2 d-none d-lg-flex justify-content-center align-items-center">
               |
             </span>
-            <Nav.Link as={NavLink} to="/b4/products" className="text-white">
+            <Nav.Link as={NavLink} to="/b4/products">
               SHOP
             </Nav.Link>
+            {user.id !== null && user.isAdmin === true && (
+              <>
+                <span className="divider mx-2 d-none d-lg-flex justify-content-center align-items-center">
+                  |
+                </span>
+                <Nav.Link as={NavLink} to="/b4/orders">
+                  ORDERS
+                </Nav.Link>
+              </>
+            )}
           </Nav>
           <Nav className="ms-auto">
             {user.id !== null ? (
               user.isAdmin === true ? (
                 <>
-                  <Nav.Link as={NavLink} to="/b4/orders">
-                    Orders
-                  </Nav.Link>
                   <Link to="#" onClick={handleLogout} className="logout-link">
-                    <Button variant="danger" className="rounded-0">
+                    <Button variant="danger" className="rounded-0 px-5">
                       Log Out
                     </Button>
                   </Link>
@@ -100,9 +108,9 @@ export default function AppNavbar() {
                 <Nav.Link
                   as={NavLink}
                   to="/b4/register"
-                  className="register-link text-white"
+                  className="register-link"
                 >
-                  Register
+                  REGISTER
                 </Nav.Link>
                 <span className="divider mx-3 d-none d-lg-flex justify-content-center align-items-center">
                   |

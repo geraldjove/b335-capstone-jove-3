@@ -78,8 +78,8 @@ export default function Register() {
   return (
     <Form
       onSubmit={(event) => registerUser(event)}
-      className="p-4 mb-3 shadow-lg mx-auto mt-5"
-      style={{ maxWidth: "600px", backgroundColor: "#FFFFFF" }}
+      className="p-4 mb-3 shadow-lg mx-auto mt-5 bg-white"
+      style={{ maxWidth: "600px" }}
     >
       <h2 className="my-1 text-center">Register</h2>
       <div className="row mt-5">
