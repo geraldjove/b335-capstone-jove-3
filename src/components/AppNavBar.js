@@ -21,7 +21,7 @@ export default function AppNavbar() {
       if (result.isConfirmed) {
         // Handle the logout logic here
         // For example, redirecting to the logout route
-        window.location.href = "/b4/logout";
+        window.location.href = "/b4/login";
       }
     });
   };
