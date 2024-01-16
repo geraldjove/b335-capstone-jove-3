@@ -9,3 +9,25 @@
 .cardHighlight {
   min-height: 100%;
 }
+
+h1{
+  font-weight: bolder !important;
+  color: white !important;
+}
+
+.h1-pink{
+  color: #cc5588 !important;
+}
+
+.btn-pink{
+  background-color: #cc5588 !important;
+}
+
+body{
+  background-color: #33335b !important;
+}
+
+.footer-text {
+  letter-spacing: 3px; /* Adjust the spacing as needed */
+  font-weight: 400;
+}
