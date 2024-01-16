@@ -79,10 +79,10 @@ export default function Login() {
   :
     <div className="container mt-5 d-flex align-items-center justify-content-center">
       <div className="row col-md-8 mt-5">
-        <div className="col-md-6 p-4 bg-primary d-flex align-items-center">
+        <div className="col-md-6 p-4 bg-pink d-flex align-items-center">
           {/* Your content for the left side */}
         </div>
-        <div className="col-md-6 p-4 shadow-lg d-flex align-items-center">
+        <div className="col-md-6 p-4 shadow-lg d-flex align-items-center bg-white">
           <div className="mx-auto">
             <h2 className="text-center mb-4">Account Log In</h2>
             <hr className="mx-auto" style={{ width: "80px" }}></hr>
