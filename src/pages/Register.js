@@ -79,7 +79,7 @@ export default function Register() {
     <Form
       onSubmit={(event) => registerUser(event)}
       className="p-4 mb-3 shadow-lg mx-auto mt-5"
-      style={{ maxWidth: "600px" }}
+      style={{ maxWidth: "600px", backgroundColor: "#FFFFFF" }}
     >
       <h2 className="my-1 text-center">Register</h2>
       <div className="row mt-5">
@@ -176,14 +176,18 @@ export default function Register() {
           type="submit"
           id="submitBtn"
           disabled
+          style={{ backgroundColor: "#33335b", borderColor: "#ffffff" }}
         >
           Submit
         </Button>
       )}
       <div className="text-center mt-4">
         <p>
-          Already have an account? <Link to="/b4/login">Click here</Link> to log
-          in
+          Already have an account?{" "}
+          <Link to="/b4/login" style={{ color: "#cc5588" }}>
+            Click here
+          </Link>{" "}
+          to log in
         </p>
       </div>
     </Form>

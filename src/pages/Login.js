@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import UserContext from "../UserContext";
 import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import LoginImg from "../images/login.png";
 
 export default function Login() {
   // State hooks to store the values of the input fields
@@ -68,23 +69,30 @@ export default function Login() {
           id: data.result.id,
           isAdmin: data.result.isAdmin,
         });
-  
+
         console.log(user);
       });
   };
 
-  return (
-    (user.id !== null)?
+  return user.id !== null ? (
     <Navigate to="/b4/products" />
-  :
+  ) : (
     <div className="container mt-5 d-flex align-items-center justify-content-center">
-      <div className="row col-md-8 mt-5">
-        <div className="col-md-6 p-4 bg-primary d-flex align-items-center">
-          {/* Your content for the left side */}
+      <div className="row col-md-8 mt-3">
+        <div
+          className="col-md-6 p-4 d-flex align-items-center"
+          style={{ backgroundColor: "#33335b" }}
+        >
+          <img className="w-100" src={LoginImg} />
         </div>
-        <div className="col-md-6 p-4 shadow-lg d-flex align-items-center">
+        <div
+          className="col-md-6 p-4 shadow-lg d-flex align-items-center"
+          style={{ backgroundColor: "#ffffff" }}
+        >
           <div className="mx-auto">
-            <h2 className="text-center mb-4">Account Log In</h2>
+            <h2 className="text-center mb-4" style={{ color: "#33335b" }}>
+              Account Log In
+            </h2>
             <hr className="mx-auto" style={{ width: "80px" }}></hr>
             <Form className="mt-5" onSubmit={(e) => authenticate(e)}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -110,8 +118,9 @@ export default function Login() {
               <div className="text-center mt-4">
                 <Button
                   type="submit"
-                  className="btn btn-primary w-100"
+                  className="btn w-100"
                   disabled={!isActive}
+                  style={{ backgroundColor: "#33335b", color: "#cc5588" }}
                 >
                   LOG IN
                 </Button>
@@ -120,7 +129,9 @@ export default function Login() {
             <div className="text-center mt-5">
               <p>
                 Don't have an account?{" "}
-                <Link to="/b4/register">Register here</Link>
+                <Link to="/b4/register" style={{ color: "#cc5588" }}>
+                  Register here
+                </Link>
               </p>
             </div>
           </div>
