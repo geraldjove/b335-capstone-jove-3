@@ -19,7 +19,15 @@ h1 {
   color: #cc5588 !important;
 }
 
+<<<<<<< HEAD
 .btn-pink {
+=======
+.bg-pink{
+  background-color: #cc5588 !important;
+}
+
+.btn-pink{
+>>>>>>> 6c524e12cc1f40e1fec2bccbf6ad9bd878efd628
   background-color: #cc5588 !important;
 }
 
