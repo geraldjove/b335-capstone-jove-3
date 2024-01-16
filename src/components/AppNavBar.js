@@ -110,7 +110,7 @@ export default function AppNavbar() {
               to="/b4/register"
               className="register-link"
               >
-              Register
+              REGISTER
               </Nav.Link>
               <span className="divider mx-3 d-none d-lg-flex justify-content-center align-items-center">
               |
