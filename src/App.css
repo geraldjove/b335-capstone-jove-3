@@ -20,17 +20,19 @@ h1 {
   border-color: #cc5588 !important;
 }
 
-.bg-pink{
+.bg-pink {
   background-color: #cc5588 !important;
 }
 
 .btn-pink {
   background-color: #cc5588 !important;
-  border-color: #33335b !important;
+  border-color: #313c5d !important;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
     rgba(0, 0, 0, 0.06) 0px 2px 4px -1px !important;
 }
-
+.bi-cart3 {
+  font-size: 30px;
+}
 body {
-  background-color: #33335b !important;
+  background-color: #313c5d !important;
 }

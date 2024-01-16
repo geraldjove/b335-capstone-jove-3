@@ -34,7 +34,7 @@ export default function AppNavbar() {
     >
       <Container>
         <Navbar.Brand as={Link} to="/" className="text-white">
-          <img src={Brand} />
+          <img style={{ width: "100px" }} src={Brand} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -46,7 +46,7 @@ export default function AppNavbar() {
               |
             </span>
             <Nav.Link as={NavLink} to="/b4/products">
-              SHOP
+              SHOP <i className="bi bi-shop mx-1"></i>
             </Nav.Link>
             {user.id !== null && user.isAdmin === true && (
               <>
@@ -54,7 +54,7 @@ export default function AppNavbar() {
                   |
                 </span>
                 <Nav.Link as={NavLink} to="/b4/orders">
-                  ORDERS
+                  ORDERS <i className="bi bi-truck mx-1"></i>
                 </Nav.Link>
               </>
             )}
@@ -72,29 +72,15 @@ export default function AppNavbar() {
               ) : (
                 <>
                   <Nav.Link as={NavLink} to="/b4/cart/get-cart">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="30"
-                      height="30"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#e4e4e6"
-                      stroke-width="1"
-                      stroke-linecap="butt"
-                      stroke-linejoin="round"
-                    >
-                      <circle cx="10" cy="20.5" r="1" />
-                      <circle cx="18" cy="20.5" r="1" />
-                      <path d="M2.5 2.5h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6l1.6-8.4H7.1" />
-                    </svg>
+                    <i class="bi bi-cart3"></i>
                   </Nav.Link>
-                  <span className="divider mx-3 d-flex justify-content-center align-items-center">
+                  <span className="divider mx-3 d-none d-lg-flex justify-content-center align-items-center">
                     |
                   </span>
                   <Link
                     to="#"
                     onClick={handleLogout}
-                    className="logout-link d-flex justify-content-center align-items-center"
+                    className="logout-link d-flex align-items-center"
                     style={{ textDecoration: "none" }}
                   >
                     <Button variant="danger" className="rounded-0 px-4">

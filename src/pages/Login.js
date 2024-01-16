@@ -81,7 +81,7 @@ export default function Login() {
       <div className="row col-md-8 mt-3">
         <div
           className="col-md-6 p-4 d-flex align-items-center"
-          style={{ backgroundColor: "#33335b" }}
+          style={{ backgroundColor: "#313c5d" }}
         >
           <img className="w-100" src={LoginImg} />
         </div>
@@ -120,7 +120,7 @@ export default function Login() {
                   type="submit"
                   className="btn w-100"
                   disabled={!isActive}
-                  style={{ backgroundColor: "#33335b", color: "#cc5588" }}
+                  style={{ backgroundColor: "#313c5d", color: "#cc5588" }}
                 >
                   LOG IN
                 </Button>
