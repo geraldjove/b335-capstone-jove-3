@@ -187,7 +187,7 @@ export default function Register() {
           <Link to="/b4/login" style={{ color: "#cc5588" }}>
             Click here
           </Link>{" "}
-          to log in
+          to log in.
         </p>
       </div>
     </Form>
