@@ -72,9 +72,11 @@ const Home = () => {
         </Col>
         </Row>
         </Container>
+        <Container>
         <footer className="text-light text-left py-3 mx-5">
         <p className="footer-text">contact us: gerald@mail.com | lehi@mail.com</p>
         </footer>
+        </Container>
         </>
         );
     };
