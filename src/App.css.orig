@@ -20,14 +20,14 @@ h1 {
 }
 
 <<<<<<< HEAD
-.btn-pink {
-=======
 .bg-pink{
   background-color: #cc5588 !important;
 }
 
 .btn-pink{
->>>>>>> 6c524e12cc1f40e1fec2bccbf6ad9bd878efd628
+=======
+.btn-pink {
+>>>>>>> 42a750da3e47e1b1bc66839af2f3d0e2088ffb32
   background-color: #cc5588 !important;
 }
 
