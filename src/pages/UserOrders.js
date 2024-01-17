@@ -28,7 +28,7 @@ const UserOrders = () => {
   
   const fetchUserDetails = async (userId) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/users`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/users/all`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
         },
