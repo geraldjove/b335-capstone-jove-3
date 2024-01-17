@@ -83,7 +83,7 @@ export default function Products() {
     <>
       <Container>
         <Button variant="primary" onClick={handleShowSearchModal}>
-          Search By Price <i className="bi bi-search mx-1"></i>
+          Search <i className="bi bi-search mx-1"></i>
         </Button>
       </Container>
 
