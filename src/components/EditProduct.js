@@ -10,7 +10,8 @@ export default function EditProduct({ product, fetchData }) {
     const [showEdit, setShowEdit] = useState(false);
 
     const openEdit = (productId) => {
-        fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`)
+        fetch(`${process.env.REACT_APP_API_URL}/products/${productId}` ||
+        `${process.env.REACT_APP_API_URL_RENDER}/products/${productId}`)
             .then(res => res.json())
             .then(data => {
                 setProductId(data.products._id);
@@ -33,7 +34,8 @@ export default function EditProduct({ product, fetchData }) {
     const editProduct = (e) => {
         e.preventDefault();
     
-        fetch(`${process.env.REACT_APP_API_URL}/products/${productId}/update`, {
+        fetch(`${process.env.REACT_APP_API_URL}/products/${productId}/update` ||
+        `${process.env.REACT_APP_API_URL_RENDER}/products/${productId}/update`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

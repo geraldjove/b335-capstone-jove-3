@@ -8,7 +8,8 @@ export default function Cart() {
 
   useEffect(() => {
     // Fetch cart data from your database or API
-    fetch(`${process.env.REACT_APP_API_URL}/cart/get-cart`, {
+    fetch(`${process.env.REACT_APP_API_URL}/cart/get-cart` ||
+    `${process.env.REACT_APP_API_URL_RENDER}/cart/get-cart`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +24,8 @@ export default function Cart() {
         // Fetch product details for each item in the cart
         const fetchProductDetails = cartItems.map((item) =>
           fetch(
-            `${process.env.REACT_APP_API_URL}/products/${item.productId}`
+            `${process.env.REACT_APP_API_URL}/products/${item.productId}` ||
+            `${process.env.REACT_APP_API_URL_RENDER}/products/${item.productId}`
           ).then((res) => res.json())
         );
 
@@ -62,7 +64,8 @@ export default function Cart() {
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform the checkout operation
-        fetch(`${process.env.REACT_APP_API_URL}/orders/checkout`, {
+        fetch(`${process.env.REACT_APP_API_URL}/orders/checkout` ||
+        `${process.env.REACT_APP_API_URL_RENDER}/orders/checkout`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -108,7 +111,8 @@ export default function Cart() {
     setCartItems(updatedCartItems);
 
     // Update the quantity on the server
-    fetch(`${process.env.REACT_APP_API_URL}/cart/update-cart-quantity`, {
+    fetch(`${process.env.REACT_APP_API_URL}/cart/update-cart-quantity` ||
+    `${process.env.REACT_APP_API_URL_RENDER}/cart/update-cart-quantity`, {
       method: "PATCH", // Assuming you use PATCH for updating quantity
       headers: {
         "Content-Type": "application/json",
@@ -138,7 +142,8 @@ export default function Cart() {
 
     // Remove the item from the server
     fetch(
-      `${process.env.REACT_APP_API_URL}/cart/${productId}/remove-from-cart`,
+      `${process.env.REACT_APP_API_URL}/cart/${productId}/remove-from-cart` ||
+      `${process.env.REACT_APP_API_URL_RENDER}/cart/${productId}/remove-from-cart`,
       {
         method: "DELETE",
         headers: {

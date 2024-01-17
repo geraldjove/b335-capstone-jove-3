@@ -8,7 +8,8 @@ const UserOrders = () => {
   
   const fetchProductDetails = async (productId) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/products/${productId}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/products/${productId}` || 
+      `${process.env.REACT_APP_API_URL_RENDER}/products/${productId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
         },
@@ -28,7 +29,9 @@ const UserOrders = () => {
   
   const fetchUserDetails = async (userId) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/users`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/users` ||
+      `${process.env.REACT_APP_API_URL_RENDER}/users`
+      , {
         // const response = await fetch(`http://localhost:4004/b4/users`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access')}`,
@@ -62,7 +65,10 @@ const UserOrders = () => {
   useEffect(() => {
     const fetchUserOrders = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/orders/all-orders`, {
+        const response = await fetch(`
+        ${process.env.REACT_APP_API_URL}/orders/all-order` ||
+       `${process.env.REACT_APP_API_URL_RENDER}/orders/all-orders`
+        , {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('access')}`,
           },

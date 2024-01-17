@@ -44,7 +44,8 @@ export default function Register() {
   function registerUser(event) {
     event.preventDefault(); // prevents the default behavior of an event. Specifically in our case submit event, it will prevent the refresh/redirection of the page
 
-    fetch("http://localhost:4004/b4/users", {
+    fetch(`${process.env.REACT_APP_API_URL}/users` ||
+    `${process.env.REACT_APP_API_URL_RENDER}/users`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       // Request body

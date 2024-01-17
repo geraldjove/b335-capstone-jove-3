@@ -28,7 +28,8 @@ export default function Login() {
     // Prevents page redirection via form submission
     e.preventDefault();
 
-    fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
+    fetch(`${process.env.REACT_APP_API_URL}/users/login` ||
+    `${process.env.REACT_APP_API_URL_RENDER}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +58,8 @@ export default function Login() {
     setPassword("");
   }
   const retrieveUserDetails = (token) => {
-    fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
+    fetch(`${process.env.REACT_APP_API_URL}/users/details` ||
+    `${process.env.REACT_APP_API_URL_RENDER}/users/details`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

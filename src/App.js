@@ -29,7 +29,8 @@ function App() {
   }, [user]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
+    fetch(`${process.env.REACT_APP_API_URL}/users/details` ||
+    `${process.env.REACT_APP_API_URL_RENDER}/users/details`, {
       headers: {
         Authorization: `Bearer ${ localStorage.getItem('access') }`
       }

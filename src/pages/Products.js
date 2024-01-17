@@ -17,8 +17,10 @@ export default function Products() {
   const fetchData = async () => {
     try {
       const fetchUrl = user?.isAdmin
-        ? `${process.env.REACT_APP_API_URL}/products/all`
-        : `${process.env.REACT_APP_API_URL}/products/`;
+        ? `${process.env.REACT_APP_API_URL}/products/all` ||
+        `${process.env.REACT_APP_API_URL_RENDER}/products/all`
+        : `${process.env.REACT_APP_API_URL}/products/` ||
+        `${process.env.REACT_APP_API_URL_RENDER}/products/`;
 
       const response = await fetch(fetchUrl, {
         headers: {

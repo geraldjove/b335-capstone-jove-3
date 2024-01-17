@@ -5,7 +5,8 @@ import Swal from 'sweetalert2';
 
 export default function ArchiveCourse({ product, isActive, fetchData }) {
   const archiveToggle = () => {
-  fetch(`${process.env.REACT_APP_API_URL}/products/${product}/archive`, {
+  fetch(`${process.env.REACT_APP_API_URL}/products/${product}/archive` ||
+  `${process.env.REACT_APP_API_URL_RENDER}/products/${product}/archive`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -41,7 +42,8 @@ export default function ArchiveCourse({ product, isActive, fetchData }) {
 };
 
 const activateToggle = () => {
-  fetch(`${process.env.REACT_APP_API_URL}/products/${product}/activate`, {
+  fetch(`${process.env.REACT_APP_API_URL}/products/${product}/activate` ||
+  `${process.env.REACT_APP_API_URL_RENDER}/products/${product}/activate`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
