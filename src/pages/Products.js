@@ -72,7 +72,19 @@ export default function Products() {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div
+        className="d-flex align-items-center justify-content-center"
+        style={{ height: "50vh" }}
+      >
+        <div className="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
