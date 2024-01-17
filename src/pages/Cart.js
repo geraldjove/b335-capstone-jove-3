@@ -158,8 +158,42 @@ export default function Cart() {
   };
 
   const handleClearCart = () => {
-    // Clear all items from the local state
-    setCartItems([]);
+    // Show a confirmation dialog using SweetAlert
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This will clear your cart. You won't be able to recover the items.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, clear it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // User confirmed, proceed with clearing the cart
+        fetch(`${process.env.REACT_APP_API_URL}/cart/clear-cart`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("Cart cleared successfully", data);
+            setCartItems([]);
+            Swal.fire("Cleared!", "Your cart has been cleared.", "success");
+          })
+          .catch((error) => {
+            console.error("Error clearing cart:", error);
+            Swal.fire("Error", "An error occurred while clearing the cart.", "error");
+          });
+      }
+    });
   };
 
   return (
