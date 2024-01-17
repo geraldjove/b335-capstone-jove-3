@@ -6,7 +6,6 @@ import { Container } from "react-bootstrap";
 import AppNavbar from "./components/AppNavBar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Logout from "./pages/Logout";
 import Products from "./pages/Products";
 import Home from "./pages/Home";
 import ProductView from "./pages/ProductView";
@@ -63,7 +62,6 @@ function App() {
             <Route path="/b4/cart/get-cart" element={<Cart />} />
             <Route path="/b4/register" element={<Register />} />
             <Route path="/b4/login" element={<Login />} />
-            <Route path="/b4/logout" element={<Logout />} />
             <Route path="/b4/products/:productId" element={<ProductView />} />
           </Routes>
         </Container>

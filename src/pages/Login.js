@@ -4,6 +4,7 @@ import UserContext from "../UserContext";
 import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import LoginImg from "../images/login.png";
+import Swal from "sweetalert2";
 
 export default function Login() {
   // State hooks to store the values of the input fields
@@ -47,11 +48,21 @@ export default function Login() {
           // setUser(data); // user = {access: adskjaslkdqwk }
           retrieveUserDetails(data.access_token);
 
-          alert(data.message);
-        } else {
-          alert(data.message);
-        }
-      });
+                  // Use SweetAlert for successful login
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: data.message,
+        });
+      } else {
+        // Use SweetAlert for unsuccessful login
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: data.message,
+        });
+      }
+    });
     // Clear input fields after submission
     setEmail("");
     setPassword("");
