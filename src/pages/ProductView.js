@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
+import { MDBCardBody, MDBCardImage } from 'mdb-react-ui-kit';
 
 export default function ProductView() {
   const { productId } = useParams();
@@ -14,6 +15,7 @@ export default function ProductView() {
   const [show, setShow] = useState(false);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
+  const [image, setImage] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -85,26 +87,49 @@ export default function ProductView() {
     });
   }, [productId]);
 
+  useEffect(() => {
+    // Fetch random character from the API
+    fetch('https://rickandmortyapi.com/api/character')
+      .then((response) => response.json())
+      .then((data) => {
+        // Get a random index within the range of the array
+        const randomIndex = Math.floor(Math.random() * data.results.length);
+        
+        // Extract image URL from the fetched data using the random index
+        const randomCharacter = data.results[randomIndex];
+        
+        if (randomCharacter && randomCharacter.image) {
+          setImage(randomCharacter.image);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching random character:', error);
+      });
+  }, []); // Empty dependency array ensures the effect runs only once
+
   
   return (
     <Container className="mt-5">
     <Row>
     <Col lg={{ span: 6, offset: 3 }}>
     <Card>
-    <Card.Body className="text-center">
-    <Card.Title>{name}</Card.Title>
+    <MDBCardImage src={image} position='top' alt='Random Character'/>
+
+    <MDBCardBody>
+    <Card.Title className='text-primary text-center'>{name}</Card.Title>
     <Card.Subtitle>Description:</Card.Subtitle>
     <Card.Text>{description}</Card.Text>
     <Card.Subtitle>Price:</Card.Subtitle>
-    <Card.Text>PhP {price}</Card.Text>
-    <Card.Subtitle>Quantity:</Card.Subtitle>
+    <Card.Text className='text-danger'>PhP {price}</Card.Text>
+    <Card.Subtitle className='text-center'>Quantity:</Card.Subtitle>
     <Card.Text>
-    <InputGroup>
+    <InputGroup className='w-50 d-flex mx-auto'>
     <Button variant="outline-secondary" onClick={handleDecrement}>-</Button>
     <FormControl 
     aria-label="Quantity"
     value={quantity}
     onChange={handleInputChange}
+    className='text-center'
     />
     <Button variant="outline-secondary" onClick={handleIncrement}>+</Button>
     </InputGroup>
@@ -112,7 +137,7 @@ export default function ProductView() {
   
     {user.id !== null ? (
 
-      <Button variant="primary" block onClick={() => buyProduct(productId)}>
+      <Button className='d-flex mx-auto' variant="primary" block onClick={() => buyProduct(productId)}>
       Add to Cart
       </Button>
 
@@ -121,7 +146,7 @@ export default function ProductView() {
         Log in to Buy
         </Link>
         )}
-        </Card.Body>
+        </MDBCardBody>
         </Card>
         </Col>
         </Row>
