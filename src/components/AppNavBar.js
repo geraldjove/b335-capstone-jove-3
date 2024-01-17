@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import Brand from "../images/brand.svg";
 
 export default function AppNavbar() {
-  const { user } = useContext(UserContext);
+  const { user,unsetUser } = useContext(UserContext);
 
   const handleLogout = () => {
     Swal.fire({
@@ -19,6 +19,7 @@ export default function AppNavbar() {
       confirmButtonText: "Yes, log me out!",
     }).then((result) => {
       if (result.isConfirmed) {
+        unsetUser();
         // Handle the logout logic here
         // For example, redirecting to the logout route
         window.location.href = "/b4/login";

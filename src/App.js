@@ -63,7 +63,6 @@ function App() {
             <Route path="/b4/cart/get-cart" element={<Cart />} />
             <Route path="/b4/register" element={<Register />} />
             <Route path="/b4/login" element={<Login />} />
-            <Route path="/b4/logout" element={<Logout />} />
             <Route path="/b4/products/:productId" element={<ProductView />} />
           </Routes>
         </Container>
